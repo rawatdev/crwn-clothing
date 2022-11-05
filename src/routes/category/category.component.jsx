@@ -4,14 +4,12 @@ import { useParams } from "react-router-dom"
 import { CategoriesContext } from "../../contexts/categories.context"
 import ProductCard from "../../components/product-card/product-card.component"
 
-import "./category.styles.scss"
+import * as S from "./category.styles"
 
 const Category = () => {
   const { category } = useParams()
   const { categoriesMap } = useContext(CategoriesContext)
   const [products, setProducts] = useState([])
-
-  console.log(products)
 
   useEffect(() => {
     setProducts(categoriesMap[category])
@@ -23,12 +21,13 @@ const Category = () => {
 
   return (
     <>
-      <h2 className="category-title">{category.toUpperCase()}</h2>
-      <div className="category-container">
+      <S.CategoryTitle>{category.toUpperCase()}</S.CategoryTitle>
+
+      <S.CategoryContainer>
         {products?.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
-      </div>
+      </S.CategoryContainer>
     </>
   )
 }
